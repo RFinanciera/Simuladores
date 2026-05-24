@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Simuladores Financieros | Revolución Financiera</title>
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="icon" href="favicon.png" type="image/png" sizes="64x64">
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-Q6TZQGEE3H"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-Q6TZQGEE3H');
+    </script>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-primary: #FAFBFC;
+            --bg-secondary: #FFFFFF;
+            --bg-tertiary: #F1F3F5;
+            --text-primary: #1A1D23;
+            --text-secondary: #5A6270;
+            --text-muted: #8C939E;
+            --accent: #E63B2E;
+            --accent-light: #FEF0EF;
+            --border: #E5E8EB;
+            --shadow-sm: 0 1px 3px rgba(0,0,0,0.04), 0 1px 2px rgba(0,0,0,0.06);
+            --shadow-md: 0 4px 16px rgba(0,0,0,0.06), 0 2px 4px rgba(0,0,0,0.04);
+            --shadow-lg: 0 12px 40px rgba(0,0,0,0.08);
+            --radius-md: 12px;
+            --radius-lg: 16px;
+            --radius-xl: 20px;
+        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'DM Sans', -apple-system, sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        /* HERO */
+        .hero {
+            background: linear-gradient(135deg, #2D3340 0%, #434D5E 100%);
+            padding: 60px 24px 52px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        .hero::before {
+            content: ''; position: absolute; top: -50%; left: -50%; width: 200%; height: 200%;
+            background: radial-gradient(ellipse at 40% 50%, rgba(230,59,46,0.08) 0%, transparent 60%);
+            pointer-events: none;
+        }
+        .hero-logo {
+            width: 72px; height: 72px; border-radius: 16px; object-fit: contain;
+            margin-bottom: 20px; position: relative;
+        }
+        .hero h1 {
+            font-size: clamp(28px, 5vw, 44px); font-weight: 700; color: #FFFFFF;
+            margin-bottom: 8px; position: relative; letter-spacing: -0.5px;
+        }
+        .hero h1 span { color: var(--accent); }
+        .hero p {
+            font-size: clamp(15px, 2.5vw, 18px); color: rgba(255,255,255,0.55);
+            max-width: 560px; margin: 0 auto; position: relative;
+        }
+
+        /* MAIN */
+        .main { max-width: 900px; margin: 0 auto; padding: 40px 24px 60px; }
+
+        .section-label {
+            font-family: 'Space Mono', monospace; font-size: 11px; letter-spacing: 1.5px;
+            text-transform: uppercase; color: var(--text-muted); margin-bottom: 16px; font-weight: 700;
+        }
+
+        /* SIMULATOR CARDS */
+        .sim-grid {
+            display: flex; flex-direction: column; gap: 16px; margin-bottom: 48px;
+        }
+        .sim-card {
+            background: var(--bg-secondary); border-radius: var(--radius-lg);
+            border: 1px solid var(--border); padding: 24px 28px;
+            box-shadow: var(--shadow-sm); display: flex; align-items: center;
+            gap: 20px; text-decoration: none; color: inherit;
+            transition: all 0.25s ease; cursor: pointer;
+        }
+        .sim-card:hover {
+            box-shadow: var(--shadow-md); transform: translateY(-3px);
+            border-color: var(--accent);
+        }
+        .sim-icon {
+            width: 56px; height: 56px; border-radius: var(--radius-md);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 28px; flex-shrink: 0;
+        }
+        .sim-body { flex: 1; }
+        .sim-name { font-size: 18px; font-weight: 700; margin-bottom: 4px; }
+        .sim-desc { font-size: 14px; color: var(--text-secondary); line-height: 1.5; }
+        .sim-arrow {
+            font-size: 20px; color: var(--text-muted); flex-shrink: 0;
+            transition: transform 0.2s;
+        }
+        .sim-card:hover .sim-arrow { transform: translateX(4px); color: var(--accent); }
+        .sim-badge {
+            display: inline-block; padding: 2px 8px; border-radius: 100px;
+            font-size: 11px; font-weight: 600; margin-left: 8px;
+        }
+        .badge-new { background: var(--accent-light); color: var(--accent); }
+
+        .icon-blue { background: #EFF6FF; }
+        .icon-green { background: #F0FDF4; }
+        .icon-purple { background: #F5F3FF; }
+        .icon-orange { background: #FFF7ED; }
+        .icon-red { background: var(--accent-light); }
+
+        /* ASESORIA SECTION */
+        .asesoria {
+            background: linear-gradient(135deg, var(--accent) 0%, #C4291E 100%);
+            border-radius: var(--radius-xl); padding: 36px 32px;
+            color: white; text-align: center; margin-bottom: 48px;
+            position: relative; overflow: hidden;
+        }
+        .asesoria::before {
+            content: ''; position: absolute; top: -40%; right: -20%;
+            width: 300px; height: 300px;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 0%, transparent 70%);
+            pointer-events: none;
+        }
+        .asesoria h2 {
+            font-size: 26px; font-weight: 700; margin-bottom: 12px; position: relative;
+        }
+        .asesoria p {
+            font-size: 16px; opacity: 0.9; max-width: 520px;
+            margin: 0 auto 24px; position: relative; line-height: 1.6;
+        }
+        .asesoria-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            background: white; color: var(--accent); padding: 14px 32px;
+            border-radius: 100px; text-decoration: none; font-weight: 700;
+            font-size: 16px; transition: transform 0.2s, box-shadow 0.2s;
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+        .asesoria-btn:hover { transform: translateY(-2px); box-shadow: 0 8px 24px rgba(0,0,0,0.2); }
+        .asesoria-features {
+            display: flex; justify-content: center; gap: 24px; margin-top: 20px;
+            flex-wrap: wrap; position: relative;
+        }
+        .asesoria-feat {
+            display: flex; align-items: center; gap: 6px;
+            font-size: 14px; opacity: 0.85;
+        }
+
+        /* REDES */
+        .redes {
+            background: var(--bg-secondary); border-radius: var(--radius-lg);
+            border: 1px solid var(--border); padding: 32px;
+            text-align: center; margin-bottom: 48px;
+        }
+        .redes h3 { font-size: 20px; font-weight: 700; margin-bottom: 8px; }
+        .redes p { font-size: 14px; color: var(--text-muted); margin-bottom: 24px; }
+        .redes-grid {
+            display: flex; justify-content: center; gap: 14px; flex-wrap: wrap;
+        }
+        .red-btn {
+            display: inline-flex; align-items: center; gap: 8px;
+            padding: 12px 24px; border-radius: 100px;
+            text-decoration: none; font-weight: 700; font-size: 14px;
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+        .red-btn:hover { transform: translateY(-2px); }
+        .red-yt { background: #FF0000; color: white; box-shadow: 0 4px 12px rgba(255,0,0,0.2); }
+        .red-ig { background: linear-gradient(135deg,#833AB4,#FD1D1D,#F77737); color: white; box-shadow: 0 4px 12px rgba(131,58,180,0.2); }
+        .red-tw { background: #1DA1F2; color: white; box-shadow: 0 4px 12px rgba(29,161,242,0.2); }
+        .red-tg { background: #0088CC; color: white; box-shadow: 0 4px 12px rgba(0,136,204,0.2); }
+
+        /* FOOTER */
+        .footer {
+            background: #3D4452; color: rgba(255,255,255,0.5);
+            text-align: center; padding: 24px; font-size: 13px;
+        }
+        .footer a { color: var(--accent); text-decoration: none; }
+
+        @media (max-width: 640px) {
+            .sim-card { flex-direction: column; text-align: center; padding: 20px; }
+            .sim-arrow { display: none; }
+            .hero { padding: 44px 20px 40px; }
+            .asesoria { padding: 28px 20px; }
+            .asesoria h2 { font-size: 22px; }
+        }
+    </style>
+</head>
+<body>
+
+<!-- HERO -->
+<section class="hero">
+    <img src="revfin_logo.png" alt="Revolución Financiera" class="hero-logo">
+    <h1>Simuladores <span>Financieros</span></h1>
+    <p>Herramientas gratuitas para tomar mejores decisiones de inversión</p>
+</section>
+
+<!-- MAIN -->
+<main class="main">
+
+    <!-- SIMULATORS -->
+    <div class="section-label">Herramientas disponibles</div>
+    <div class="sim-grid">
+
+        <a class="sim-card" href="https://rfinanciera.github.io/Comisiones.brokers/" onclick="gtag('event','click_simulador',{simulador:'comisiones_brokers'})">
+            <div class="sim-icon icon-blue">💼</div>
+            <div class="sim-body">
+                <div class="sim-name">Comparador de Comisiones de Brokers</div>
+                <div class="sim-desc">Compará las comisiones de 8 brokers argentinos para acciones, CEDEARs, bonos, ONs, letras, cauciones y más. Incluye IVA y derechos de mercado.</div>
+            </div>
+            <span class="sim-arrow">→</span>
+        </a>
+
+        <a class="sim-card" href="https://rfinanciera.github.io/Rotacion-de-ONs/" onclick="gtag('event','click_simulador',{simulador:'rotacion_ons'})">
+            <div class="sim-icon icon-green">🔄</div>
+            <div class="sim-body">
+                <div class="sim-name">Simulador de Rotación de ONs</div>
+                <div class="sim-desc">Calculá si conviene vender una Obligación Negociable para comprar otra con mejor TIR. Te muestra cuántos meses tardás en recuperar el costo de las comisiones.</div>
+            </div>
+            <span class="sim-arrow">→</span>
+        </a>
+
+        <a class="sim-card" href="https://rfinanciera.github.io/Duration-y-sensibilidad-BONOS/" onclick="gtag('event','click_simulador',{simulador:'duration_sensibilidad'})">
+            <div class="sim-icon icon-purple">📐</div>
+            <div class="sim-body">
+                <div class="sim-name">Duration y Sensibilidad de Bonos <span class="sim-badge badge-new">NUEVO</span></div>
+                <div class="sim-desc">Entendé cómo cambia el precio de un bono cuando se mueve la tasa. Slider interactivo, gráfico de curva precio/tasa y tabla de flujos detallada.</div>
+            </div>
+            <span class="sim-arrow">→</span>
+        </a>
+
+        <a class="sim-card" href="https://rfinanciera.github.io/lecap.vender.antes/" onclick="gtag('event','click_simulador',{simulador:'lecap_vender'})">
+            <div class="sim-icon icon-orange">📊</div>
+            <div class="sim-body">
+                <div class="sim-name">¿Cuándo vender una LECAP?</div>
+                <div class="sim-desc">Simulá si te conviene vender una LECAP antes del vencimiento o esperar. Compará el rendimiento de mantener vs vender y reinvertir.</div>
+            </div>
+            <span class="sim-arrow">→</span>
+        </a>
+
+        <a class="sim-card" href="https://rfinanciera.github.io/simulador.carry.trade/" onclick="gtag('event','click_simulador',{simulador:'carry_trade'})">
+            <div class="sim-icon icon-red">💱</div>
+            <div class="sim-body">
+                <div class="sim-name">Simulador de Carry Trade</div>
+                <div class="sim-desc">Calculá el rendimiento de un carry trade en Argentina. Simulá distintos escenarios de tipo de cambio y tasa para ver si conviene la estrategia.</div>
+            </div>
+            <span class="sim-arrow">→</span>
+        </a>
+
+    </div>
+
+    <!-- CURSO -->
+    <div style="background:linear-gradient(135deg,#1A1D23 0%,#2D3340 100%);border-radius:20px;padding:40px 36px;margin-bottom:48px;color:white;position:relative;overflow:hidden;">
+        <div style="position:absolute;top:-30%;right:-10%;width:350px;height:350px;background:radial-gradient(circle,rgba(230,59,46,0.12) 0%,transparent 70%);pointer-events:none;"></div>
+        <div style="position:absolute;bottom:-20%;left:-10%;width:250px;height:250px;background:radial-gradient(circle,rgba(59,130,246,0.08) 0%,transparent 70%);pointer-events:none;"></div>
+        <div style="position:relative;">
+            <div style="display:flex;align-items:center;gap:8px;margin-bottom:16px;">
+                <span style="background:var(--accent);padding:8px 18px;border-radius:100px;font-size:18px;font-weight:700;letter-spacing:0.5px;">🎓 CURSO</span>
+            </div>
+            <h2 style="font-size:clamp(24px,4vw,32px);font-weight:700;margin-bottom:12px;line-height:1.3;">Finanzas Personales e Inversiones</h2>
+            <p style="font-size:16px;opacity:0.75;max-width:600px;line-height:1.7;margin-bottom:8px;">El curso completo para organizarte económicamente e invertir desde Argentina, aunque nunca hayas invertido un peso.</p>
+            <div style="display:flex;flex-wrap:wrap;gap:16px;margin:24px 0 28px;">
+                <div style="display:flex;align-items:center;gap:6px;font-size:14px;opacity:0.8;">📋 4 módulos completos</div>
+                <div style="display:flex;align-items:center;gap:6px;font-size:14px;opacity:0.8;">🎬 +30 clases en video</div>
+                <div style="display:flex;align-items:center;gap:6px;font-size:14px;opacity:0.8;">📊 Archivos descargables</div>
+                <div style="display:flex;align-items:center;gap:6px;font-size:14px;opacity:0.8;">🔒 Acceso de por vida</div>
+            </div>
+            <div style="display:flex;flex-wrap:wrap;gap:10px;margin-bottom:24px;">
+                <span style="background:rgba(255,255,255,0.1);padding:6px 14px;border-radius:100px;font-size:13px;">💰 Finanzas personales</span>
+                <span style="background:rgba(255,255,255,0.1);padding:6px 14px;border-radius:100px;font-size:13px;">📈 Inversiones</span>
+                <span style="background:rgba(255,255,255,0.1);padding:6px 14px;border-radius:100px;font-size:13px;">🏦 Instrumentos financieros</span>
+                <span style="background:rgba(255,255,255,0.1);padding:6px 14px;border-radius:100px;font-size:13px;">💼 Armá tu portafolio</span>
+            </div>
+            <div style="text-align:center;margin-top:28px;">
+                <a href="https://revolucion-financiera.tiendup.com/curso/finanzas-personales-e-inversiones?view_page=sale" target="_blank" onclick="gtag('event','click_curso',{accion:'ver_curso'})" style="display:inline-flex;align-items:center;gap:8px;background:var(--accent);color:white;padding:16px 32px;border-radius:100px;text-decoration:none;font-weight:700;font-size:16px;box-shadow:0 4px 16px rgba(230,59,46,0.35);transition:transform 0.2s;">🚀 Ver curso completo →</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- ASESORIA -->
+    <div class="asesoria">
+        <h2>💬 Asesoría financiera personalizada</h2>
+        <p>¿Necesitás ayuda con tu cartera de inversiones? Ofrezco asesorías 1 a 1 donde analizamos juntos tu situación y armamos una estrategia a tu medida.</p>
+        <a class="asesoria-btn" href="https://www.instagram.com/revolucionfinancieraok/" target="_blank" onclick="gtag('event','click_asesoria',{metodo:'instagram'})">📩 Escribime por Instagram</a>
+        <a class="asesoria-btn" href="mailto:matiasduva.rf@gmail.com" style="background:rgba(255,255,255,0.15);color:white;border:2px solid rgba(255,255,255,0.4);" onclick="gtag('event','click_asesoria',{metodo:'email'})">✉️ Mail: matiasduva.rf@gmail.com</a>
+        <div class="asesoria-features">
+            <div class="asesoria-feat">✅ Análisis de cartera</div>
+            <div class="asesoria-feat">✅ Estrategia personalizada</div>
+            <div class="asesoria-feat">✅ Videollamada 1 a 1</div>
+        </div>
+    </div>
+
+    <!-- REDES -->
+    <div class="redes">
+        <h3>Seguinos en redes</h3>
+        <p>Contenido diario sobre finanzas personales, inversiones y economía argentina</p>
+        <div class="redes-grid">
+            <a class="red-btn red-yt" href="https://www.youtube.com/@Revolucion.Financiera" target="_blank" onclick="gtag('event','click_red_social',{red:'youtube'})">▶ YouTube</a>
+            <a class="red-btn red-ig" href="https://www.instagram.com/revolucionfinancieraok/" target="_blank" onclick="gtag('event','click_red_social',{red:'instagram'})">📷 Instagram</a>
+        </div>
+    </div>
+
+</main>
+
+<!-- FOOTER -->
+<footer class="footer">
+    <p>Hecho con ❤️ por <a href="https://youtube.com/@Revolucion.Financiera" target="_blank">Revolución Financiera</a></p>
+</footer>
+
+</body>
+</html>
